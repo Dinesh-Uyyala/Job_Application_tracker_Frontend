@@ -20,9 +20,9 @@ import { RegisterComponent } from './core/register/register.component';
 import { NgChartsModule } from 'ng2-charts';
 import { JobseekerDashboardComponent } from './dashboard/jobseeker-dashboard/jobseeker-dashboard.component';
 import { AuthInterceptor } from './auth.interceptor';
-import { ApplicationListComponent } from './jobseeker/application-list/application-list.component';
-import { JobFormComponent } from './recruiter/job-form/job-form.component';
-import { JobListComponent } from './recruiter/job-list/job-list.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { JobseekerModule } from './jobseeker/jobseeker.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { JobListComponent } from './recruiter/job-list/job-list.component';
     LoginComponent,
     RegisterComponent,
     JobseekerDashboardComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -49,7 +50,10 @@ import { JobListComponent } from './recruiter/job-list/job-list.component';
     FormsModule,
     ReactiveFormsModule,
     NgChartsModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule,
+    MatSortModule,
+    JobseekerModule
   ],
   providers: [
     {

@@ -32,6 +32,7 @@ loading = false;
     private route: ActivatedRoute
   ) {
   this.jobId = this.route.snapshot.paramMap.get('id');
+  console.log(this.jobId);
   if (this.jobId) {
     this.loading = true;
     this.http.get<any>(`http://localhost:3000/api/jobs/${this.jobId}`, {

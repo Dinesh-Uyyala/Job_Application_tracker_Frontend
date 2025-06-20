@@ -1,0 +1,50 @@
+<!-- code to display all the job fields -->
+<div class="job-details-container">
+  <h2>Job Details</h2>
+  <mat-card>
+    <mat-card-content>
+      <div class="job-details">
+        <div class="job-field">
+          <strong>Job Title:</strong> {{ job?.title }}
+        </div>
+        <div class="job-field">
+          <strong>Company:</strong> {{ job?.companyName }}
+        </div>
+        <div class="job-field">
+          <strong>Location:</strong> {{ job?.location }}
+        </div>
+        <div class="job-field">
+          <strong>Experience Required:</strong> {{ job?.experience }} yrs
+        </div>
+        <div class="job-field">
+          <strong>Vacancies:</strong> {{ job?.vacancies }}
+        </div>
+        <div class="job-field">
+          <strong>Package:</strong> ₹{{ job?.package | number }}
+        </div>
+        <div class="job-field">
+          <strong>Work Mode:</strong> {{ job?.workMode }}
+        </div>
+        <div class="job-field">
+          <strong>Status:</strong> {{ job?.status || 'N/A' }}
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions *ngIf="role === 'jobseeker' && job.status === 'Open'">
+      <button mat-button color="accent" (click)="applyForJob(job.id)">Apply Now</button>
+    </mat-card-actions>
+  </mat-card>
+  <div class="job-description">
+    <h3>Job Description</h3>
+    <p>{{ job?.description }}</p>
+  </div>
+  <div class="job-requirements">
+    <h3>Job Requirements</h3>
+    <ul>
+      <li *ngFor="let requirement of job?.requirements">{{ requirement }}</li>
+    </ul>
+  </div>
+  <div class="job-apply-status" *ngIf="role === 'jobseeker'">
+    <h3>Application Status</h3>
+    <p *ngIf="applicationStatus">You have applied for this job.</p>
+    <p *ngIf="!applicationStatus">You have not applied for this job.</p>

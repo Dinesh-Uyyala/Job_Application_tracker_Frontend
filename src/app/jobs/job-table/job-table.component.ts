@@ -33,9 +33,7 @@ export class JobTableComponent implements OnInit {
     const userStr = localStorage.getItem('user');
     if (userStr) {
       try {
-        // const userObj = userStr ? JSON.parse(userStr) : {};
-        this.role = userStr ? JSON.parse(userStr) : {};
-        // this.role = userObj.role || '';
+        this.role= JSON.parse(userStr).role || '';
       } catch (e) {
         console.error('Failed to parse user from localStorage', e);
         this.role = '';
@@ -43,9 +41,9 @@ export class JobTableComponent implements OnInit {
     }
 
     // Add 'actions' column only if role is recruiter
-  if (this.role === 'recruiter') {
-  this.columns.push('appliedCandidates'); // Add this before actions
-  this.columns.push('actions');
+  if (this.role === 'jobseeker') {
+  this.columns.push('applyJob');
+  // this.columns.push('actions');
 }
 
 
@@ -83,7 +81,7 @@ export class JobTableComponent implements OnInit {
         });
     }
   }
-  viewAppliedCandidates(jobId: number) {
-  this.router.navigate(['/applied-candidates', jobId]);
+  applyJob(jobId: number) {
+  this.router.navigate(['/jobseeker/job-details', jobId]);
 }
 }

@@ -41,7 +41,7 @@ export class LoginComponent {
           console.log(data);
           alert("Login Successful😊");
           localStorage.setItem('token', data.token);
-          localStorage.setItem('user', data);
+          localStorage.setItem('user', JSON.stringify(data));
           localStorage.setItem('role', data.role);
           this.role = data.role;
           this.router.navigateByUrl("/" + this.role);

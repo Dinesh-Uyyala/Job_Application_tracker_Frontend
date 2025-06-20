@@ -19,7 +19,7 @@ export class AppliedCandidatesComponent implements OnInit {
   }
 
   loadCandidates() {
-    this.http.get<any[]>(`http://localhost:3000/api/jobs/${this.jobId}/candidates`)
+    this.http.get<any[]>(`http://localhost:3000/api/jobs/applied/${this.jobId}`)
       .subscribe(
         data => this.candidates = data,
         err => console.error('Failed to load candidates', err)
