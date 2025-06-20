@@ -1,0 +1,32 @@
+<mat-card>
+  <h2>{{ jobId ? 'Edit' : 'Add' }} Job</h2>
+  <form (ngSubmit)="save()">
+    <mat-form-field class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="title" name="title" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="description" name="description" required></textarea>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Company Name</mat-label>
+      <input matInput [(ngModel)]="companyName" name="companyName" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Location</mat-label>
+      <input matInput [(ngModel)]="location" name="location" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Vacancies</mat-label>
+      <input matInput type="number" [(ngModel)]="vacancies" name="vacancies" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="status" name="status" required>
+        <mat-option *ngFor="let s of statuses" [value]="s">{{s}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </form>
+</mat-card>

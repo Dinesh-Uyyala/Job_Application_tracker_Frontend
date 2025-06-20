@@ -1,0 +1,100 @@
+<mat-card>
+  <h2>Job Listings</h2>
+<p>Logged in role: {{ role }}</p>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Filter by Status</mat-label>
+    <mat-select [(ngModel)]="filterStatus" (selectionChange)="applyFilter()">
+      <mat-option value="">All</mat-option>
+      <mat-option *ngFor="let s of statuses" [value]="s">{{ s }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="filteredJobsArray" class="mat-elevation-z8 full-width">
+
+    <!-- Title -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let job"> {{ job.title }} </td>
+    </ng-container>
+
+    <!-- Company -->
+    <ng-container matColumnDef="companyName">
+      <th mat-header-cell *matHeaderCellDef> Company </th>
+      <td mat-cell *matCellDef="let job"> {{ job.companyName }} </td>
+    </ng-container>
+
+    <!-- Location -->
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef> Location </th>
+      <td mat-cell *matCellDef="let job"> {{ job.location }} </td>
+    </ng-container>
+
+    <!-- Experience -->
+    <ng-container matColumnDef="experience">
+      <th mat-header-cell *matHeaderCellDef> Experience </th>
+      <td mat-cell *matCellDef="let job"> {{ job.experience }} yrs </td>
+    </ng-container>
+
+    <!-- Vacancies -->
+    <ng-container matColumnDef="vacancies">
+      <th mat-header-cell *matHeaderCellDef> Vacancies </th>
+      <td mat-cell *matCellDef="let job"> {{ job.vacancies }} </td>
+    </ng-container>
+
+    <!-- Package -->
+    <ng-container matColumnDef="package">
+      <th mat-header-cell *matHeaderCellDef> Package </th>
+      <td mat-cell *matCellDef="let job"> ₹{{ job.package | number }} </td>
+    </ng-container>
+
+    <!-- Work Mode -->
+    <ng-container matColumnDef="workMode">
+      <th mat-header-cell *matHeaderCellDef> Work Mode </th>
+      <td mat-cell *matCellDef="let job"> {{ job.workMode }} </td>
+    </ng-container>
+
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let job"> {{ job.status || 'N/A' }} </td>
+    </ng-container>
+
+<!-- Applied Candidates Column -->
+<ng-container matColumnDef="appliedCandidates">
+  <th mat-header-cell *matHeaderCellDef> Applied Candidates </th>
+  <td mat-cell *matCellDef="let job">
+    <button
+      *ngIf="role === 'recruiter'"
+      mat-button
+      color="accent"
+      (click)="viewAppliedCandidates(job.id)"
+    >
+      View Applied
+    </button>
+  </td>
+</ng-container>
+
+
+<!-- Actions Column -->
+<ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef> Actions </th>
+  <td mat-cell *matCellDef="let job">
+    <ng-container *ngIf="role === 'recruiter'">
+      <button mat-button color="primary" (click)="editJob(job.id)">Edit</button>
+      <button mat-button color="warn" (click)="deleteJob(job.id)">Delete</button>
+    </ng-container>
+  </td>
+</ng-container>
+
+
+
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+
+  <div *ngIf="filteredJobsArray.length === 0" style="margin-top: 1em;">
+    No jobs found for selected status.
+  </div>
+</mat-card>

@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+mat-card {
+  margin: 2rem auto;
+  max-width: 600px;
+}
+.full-width {
+  width: 100%;
+}
+table {
+  width: 100%;
+}

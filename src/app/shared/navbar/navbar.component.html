@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <span>Mini Job Application Tracker</span>
+  <span class="spacer"></span>
+  <a mat-button [routerLink]="['/', role]">Dashboard</a>
+  <a mat-button routerLink="/profile">Profile</a>
+  <a mat-button routerLink="/jobs">Jobs</a>
+  <a mat-button routerLink="/recruiter/job-list" *ngIf="role==='recruiter'">Jobs List</a>
+  <a mat-button routerLink="/recruiter/job-form" *ngIf="role==='recruiter'">Post Job</a>
+  <a mat-button routerLink="/applications" *ngIf="role==='jobseeker'">My Applications</a>
+  <a mat-button routerLink="/users" *ngIf="role==='admin'">Users</a>
+  <button mat-button (click)="logout()">Logout</button>
+</mat-toolbar>

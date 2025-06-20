@@ -1,0 +1,15 @@
+<mat-card>
+  <h2>My Applications</h2>
+  <table mat-table [dataSource]="applications" class="mat-elevation-z8">
+    <ng-container matColumnDef="job_title">
+      <th mat-header-cell *matHeaderCellDef>Job</th>
+      <td mat-cell *matCellDef="let app">{{app.job_title}}</td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let app">{{app.status}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+</mat-card>

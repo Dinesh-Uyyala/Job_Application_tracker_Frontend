@@ -1,0 +1,14 @@
+<mat-card>
+  <h2>Jobseeker Dashboard</h2>
+  <div>
+    <p>Total Applications: {{ totalApplications }}</p>
+    <p>Interviews: {{ stats['Interview'] }}</p>
+    <p>Offers: {{ stats['Offered'] }}</p>
+    <p>Rejected: {{ stats['Rejected'] }}</p>
+    <p>On Hold: {{ stats['On Hold'] }}</p>
+  </div>
+  <canvas baseChart
+    [data]="chartData"
+    [type]="'pie'">
+  </canvas>
+</mat-card>
