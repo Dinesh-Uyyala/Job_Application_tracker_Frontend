@@ -41,8 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/src/environments/environment.prod.ts
-/src/environments/environment.ts
+
 
 setup-crud-files.js
 setup-frontend-files.js
