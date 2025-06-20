@@ -1,0 +1,65 @@
+<mat-card>
+  <h2>{{ jobId ? 'Edit' : 'Add' }} Job</h2>
+
+  <ng-container *ngIf="!jobId || !loading">
+  <form (ngSubmit)="save()" #jobForm="ngForm">
+    <mat-form-field class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="job.title" name="title" required />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="job.description" name="description" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Company Name</mat-label>
+      <input matInput [(ngModel)]="job.companyName" name="companyName" required />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Location</mat-label>
+      <input matInput [(ngModel)]="job.location" name="location" required />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Vacancies</mat-label>
+      <input matInput type="number" [(ngModel)]="job.vacancies" name="vacancies" required />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Logo URL</mat-label>
+      <input matInput [(ngModel)]="job.logo" name="logo" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Package</mat-label>
+      <input matInput [(ngModel)]="job.package" name="package" required />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Experience</mat-label>
+      <input matInput [(ngModel)]="job.experience" name="experience" required />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Work Mode</mat-label>
+      <mat-select [(ngModel)]="job.workMode" name="workMode" required>
+        <mat-option value="Onsite">Onsite</mat-option>
+        <mat-option value="Remote">Remote</mat-option>
+        <mat-option value="Hybrid">Hybrid</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="job.status" name="status" required>
+        <mat-option *ngFor="let s of statuses" [value]="s">{{ s }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </form>
+  </ng-container>
+</mat-card>
