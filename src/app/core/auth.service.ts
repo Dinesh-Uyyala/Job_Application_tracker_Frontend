@@ -20,7 +20,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password }).pipe(
       tap(res => {
         localStorage.setItem('token', res.token);
-        localStorage.setItem('user', JSON.stringify({ id: res.id, role: res.role }));
+        localStorage.setItem('user', JSON.stringify({ id: res.id, role: res.role ,name:res.name, mobile: res.mobile, email: res.email }));
         localStorage.setItem('role', res.role);
         this.currentUserSubject.next({ id: res.id, role: res.role });
         this.isLoggedIn$.next(true);

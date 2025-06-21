@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { RecruiterDashboardComponent } from './dashboard/dashboard.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { JobFormComponent } from './job-form/job-form.component';
 import { MatCardModule } from '@angular/material/card';
@@ -14,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { AppliedCandidatesComponent } from './applied-candidates/applied-candidates.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { RecruiterDashboardComponent } from '../dashboard/recruiter-dashboard/recruiter-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: RecruiterDashboardComponent },

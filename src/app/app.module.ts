@@ -23,6 +23,9 @@ import { AuthInterceptor } from './auth.interceptor';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { JobseekerModule } from './jobseeker/jobseeker.module';
+import { RecruiterDashboardComponent } from './recruiter/dashboard/dashboard.component';
+import { JobseekerService } from './core/jobseeker.service';
+import { RecruiterService } from './core/recruiter.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { JobseekerModule } from './jobseeker/jobseeker.module';
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    JobseekerDashboardComponent,
+    // JobseekerDashboardComponent,
+    
     
   ],
   imports: [
@@ -53,9 +57,10 @@ import { JobseekerModule } from './jobseeker/jobseeker.module';
     MatCardModule,
     MatPaginatorModule,
     MatSortModule,
-    JobseekerModule
   ],
   providers: [
+    JobseekerService,
+    RecruiterService,
     {
       provide:HTTP_INTERCEPTORS,
       useClass:AuthInterceptor,

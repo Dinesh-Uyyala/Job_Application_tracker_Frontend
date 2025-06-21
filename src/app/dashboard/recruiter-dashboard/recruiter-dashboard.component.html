@@ -1,0 +1,10 @@
+<mat-card>
+  <h2>Recruiter Dashboard</h2>
+  <div>
+    <p>Total Jobs Posted: {{ jobsPosted }}</p>
+    <p>Total Applications Received: {{ totalApplications }}</p>
+    <p>Open Jobs: {{ stats['Open'] || 0 }}</p>
+    <p>Closed Jobs: {{ stats['Closed'] || 0 }}</p>
+    <p>Paused Jobs: {{ stats['Paused'] || 0 }}</p>
+  </div>
+</mat-card>

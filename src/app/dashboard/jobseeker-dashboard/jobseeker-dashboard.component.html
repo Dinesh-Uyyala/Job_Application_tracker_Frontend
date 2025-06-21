@@ -1,14 +1,11 @@
 <mat-card>
   <h2>Jobseeker Dashboard</h2>
   <div>
-    <p>Total Applications: {{ totalApplications }}</p>
-    <p>Interviews: {{ stats['Interview'] }}</p>
-    <p>Offers: {{ stats['Offered'] }}</p>
-    <p>Rejected: {{ stats['Rejected'] }}</p>
-    <p>On Hold: {{ stats['On Hold'] }}</p>
+    <p><mat-icon>assignment</mat-icon> Total Applications: {{ totalApplications }}</p>
+<p><mat-icon>hourglass_empty</mat-icon> Applied: {{ stats['Applied'] || 0 }}</p>
+<p><mat-icon>record_voice_over</mat-icon> Interview: {{ stats['Interview'] || 0 }}</p>
+<p><mat-icon>emoji_events</mat-icon> Offered: {{ stats['Offered'] || 0 }}</p>
+<p><mat-icon>highlight_off</mat-icon> Rejected: {{ stats['Rejected'] || 0 }}</p>
+
   </div>
-  <canvas baseChart
-    [data]="chartData"
-    [type]="'pie'">
-  </canvas>
 </mat-card>
