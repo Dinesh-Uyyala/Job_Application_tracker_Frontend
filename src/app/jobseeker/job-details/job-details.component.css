@@ -1,0 +1,21 @@
+.job-details-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.job-details, .job-description, .job-requirements, .job-apply-status {
+  margin-bottom: 16px;
+}
+
+.job-field {
+  margin: 4px 0;
+}
+
+.application-form {
+  margin-top: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 12px;
+}

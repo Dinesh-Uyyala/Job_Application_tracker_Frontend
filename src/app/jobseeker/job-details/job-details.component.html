@@ -1,50 +1,77 @@
-<!-- code to display all the job fields -->
 <div class="job-details-container">
   <h2>Job Details</h2>
   <mat-card>
     <mat-card-content>
+
+      <!-- Basic Job Info -->
       <div class="job-details">
-        <div class="job-field">
-          <strong>Job Title:</strong> {{ job?.title }}
-        </div>
-        <div class="job-field">
-          <strong>Company:</strong> {{ job?.companyName }}
-        </div>
-        <div class="job-field">
-          <strong>Location:</strong> {{ job?.location }}
-        </div>
-        <div class="job-field">
-          <strong>Experience Required:</strong> {{ job?.experience }} yrs
-        </div>
-        <div class="job-field">
-          <strong>Vacancies:</strong> {{ job?.vacancies }}
-        </div>
-        <div class="job-field">
-          <strong>Package:</strong> ₹{{ job?.package | number }}
-        </div>
-        <div class="job-field">
-          <strong>Work Mode:</strong> {{ job?.workMode }}
-        </div>
-        <div class="job-field">
-          <strong>Status:</strong> {{ job?.status || 'N/A' }}
-        </div>
+        <div class="job-field"><strong>Job Title:</strong> {{ job?.title }}</div>
+        <div class="job-field"><strong>Company:</strong> {{ job?.companyName }}</div>
+        <div class="job-field"><strong>Location:</strong> {{ job?.location }}</div>
+        <div class="job-field"><strong>Experience Required:</strong> {{ job?.experience }} yrs</div>
+        <div class="job-field"><strong>Vacancies:</strong> {{ job?.vacancies }}</div>
+        <div class="job-field"><strong>Package:</strong> ₹{{ job?.package | number }}</div>
+        <div class="job-field"><strong>Work Mode:</strong> {{ job?.workMode }}</div>
+        <div class="job-field"><strong>Status:</strong> {{ job?.status || 'N/A' }}</div>
       </div>
+
+      <!-- Job Description -->
+      <div class="job-description" *ngIf="job?.description">
+        <h3>Job Description</h3>
+        <p>{{ job.description }}</p>
+      </div>
+
+      <!-- Job Requirements -->
+      <div class="job-requirements" *ngIf="job?.requirements?.length">
+        <h3>Job Requirements</h3>
+        <ul>
+          <li *ngFor="let requirement of job.requirements">{{ requirement }}</li>
+        </ul>
+      </div>
+
+      <!-- Application Status -->
+      <div class="job-apply-status" *ngIf="role === 'jobseeker'">
+        <h3>Application Status</h3>
+        <p *ngIf="applicationStatus === 'Applied'">✅ You have applied for this job.</p>
+        <p *ngIf="applicationStatus === 'Not Applied'">ℹ️ You have not applied for this job.</p>
+        <p *ngIf="applicationStatus === 'Failed to apply'">❌ Failed to apply for this job.</p>
+        <p *ngIf="applicationStatus === 'Unknown'">❓ Application status is unknown.</p>
+      </div>
+
+      <!-- Application Form -->
+      <div *ngIf="showApplicationForm" class="application-form">
+        <h3>Application Form</h3>
+        <form (ngSubmit)="submitApplication()" #appForm="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput name="name" [(ngModel)]="applicationData.name" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" name="email" [(ngModel)]="applicationData.email" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Phone</mat-label>
+    <input matInput type="tel" name="phone" [(ngModel)]="applicationData.mobile" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Resume Link</mat-label>
+    <input matInput type="url" name="resumeLink" [(ngModel)]="applicationData.resumeLink" required />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit Application</button>
+</form>
+
+      </div>
+
     </mat-card-content>
-    <mat-card-actions *ngIf="role === 'jobseeker' && job.status === 'Open'">
-      <button mat-button color="accent" (click)="applyForJob(job.id)">Apply Now</button>
+
+    <!-- Apply Now Button -->
+    <mat-card-actions *ngIf="role === 'jobseeker' && job.status === 'Open' && applicationStatus !== 'Applied'">
+      <button mat-raised-button color="accent" (click)="toggleApplicationForm()">Apply Now</button>
     </mat-card-actions>
   </mat-card>
-  <div class="job-description">
-    <h3>Job Description</h3>
-    <p>{{ job?.description }}</p>
-  </div>
-  <div class="job-requirements">
-    <h3>Job Requirements</h3>
-    <ul>
-      <li *ngFor="let requirement of job?.requirements">{{ requirement }}</li>
-    </ul>
-  </div>
-  <div class="job-apply-status" *ngIf="role === 'jobseeker'">
-    <h3>Application Status</h3>
-    <p *ngIf="applicationStatus">You have applied for this job.</p>
-    <p *ngIf="!applicationStatus">You have not applied for this job.</p>
+</div>

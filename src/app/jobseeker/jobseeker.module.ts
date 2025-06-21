@@ -6,6 +6,9 @@ import { ApplicationListComponent } from './application-list/application-list.co
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 const routes: Routes = [
   { path: '', component: JobseekerDashboardComponent },
@@ -19,7 +22,11 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatTableModule,
+    FormsModule,
+    MatInputModule
   ]
 })
 export class JobseekerModule { }
