@@ -18,7 +18,7 @@ export class JobDetailsComponent implements OnInit {
   applicationData: any = {
     name: '',
     email: '',
-    phone: '',
+    mobile: '',
     resumeLink: ''
   };
 
@@ -29,29 +29,42 @@ export class JobDetailsComponent implements OnInit {
     this.role = localStorage.getItem('role') || '';
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     this.userId = user?.id || '';
-    console.log(user);
+
     this.applicationData.name = user?.name || '';
     this.applicationData.email = user?.email || '';
-    this.applicationData.phone = user?.phone || '';
+    this.applicationData.mobile = user?.mobile || '';
 
-    this.loadDetails();
-    this.getAppliedStatus();
+    this.loadJobDetails();
+    this.checkApplicationStatus();
   }
 
-  loadDetails(): void {
+  loadJobDetails(): void {
     this.http.get<any>(`http://localhost:3000/api/jobs/${this.jobId}`)
-      .subscribe(data => this.job = data);
+      .subscribe(
+        data => this.job = data,
+        err => {
+          console.error('Error loading job details:', err);
+        }
+      );
   }
 
-  getAppliedStatus(): void {
+  checkApplicationStatus(): void {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    
-    this.http.get<{ status: string }>(`http://localhost:3000/api/jobs/${this.jobId}/status/${this.userId}`, { headers })
-      .subscribe(
-        res => this.applicationStatus = res.status,
-        err => this.applicationStatus = 'Not Applied'
-      );
+
+    this.http.get<{ status: string }>(
+      `http://localhost:3000/api/jobs/${this.jobId}/status/${this.userId}`, 
+      { headers }
+    ).subscribe(
+      res => {
+        this.applicationStatus = res.status;
+        console.log('Application status:', res.status);
+      },
+      err => {
+        console.error('Error checking application status:', err);
+        this.applicationStatus = 'Unknown';
+      }
+    );
   }
 
   toggleApplicationForm(): void {
@@ -68,17 +81,21 @@ export class JobDetailsComponent implements OnInit {
       ...this.applicationData
     };
 
-    this.http.post('http://localhost:3000/api/applications', payload, { headers })
+    this.http.post('http://localhost:3000/api/jobs/apply', payload, { headers })
       .subscribe(
-        res => {
+        () => {
           alert('Application submitted successfully!');
           this.applicationStatus = 'Applied';
           this.showApplicationForm = false;
         },
         err => {
-          console.error(err);
+          console.error('Application submission failed:', err);
           alert('Failed to submit application');
         }
       );
+  }
+
+  cancelApplication(): void {
+    this.showApplicationForm = false;
   }
 }

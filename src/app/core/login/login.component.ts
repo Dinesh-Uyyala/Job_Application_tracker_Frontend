@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,51 +9,29 @@ import { environment } from '../../../environments/environment';
 export class LoginComponent {
   email = '';
   password = '';
-  role:any = '';
-  constructor(private http: HttpClient, private router: Router) {
-    // Check if user is already logged in
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.role= localStorage.getItem('role');
-      this.router.navigateByUrl('/{{role}}');
+
+  constructor(private authService: AuthService, private router: Router) {
+    // Redirect if already logged in
+    if (this.authService.isLoggedIn) {
+      const role = this.authService.role;
+      this.router.navigateByUrl('/' + role);
     }
   }
-  //   login(){
-  //   this._loginService.login(this.loginForm.value).subscribe(
-  //     (data:any)=>{
-  //       console.log(data);
-  //       alert("Login Successful😊");
-  //       sessionStorage.setItem('token',data.token);
-  //       this._router.navigateByUrl("/dashboard");
-  //     },(err:any)=>{
-  //       alert("Internal Server Error!")
-  //     }
-  //   )
-  // }
-  
-  
-  
+
   login() {
-    this.http.post<any>(`${environment.apiUrl}/auth/login`, { email: this.email, password: this.password })
-      .subscribe({
-        next: (data: any) => {
-          console.log(data);
-          alert("Login Successful😊");
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('user', JSON.stringify(data));
-          localStorage.setItem('role', data.role);
-          this.role = data.role;
-          this.router.navigateByUrl("/" + this.role);
-        },
-        error: (err: any) => {
-          alert(err.error.message || "Internal Server Error!");
-        }
-      });
+    this.authService.login(this.email, this.password).subscribe({
+      next: (data: any) => {
+        alert("Login Successful😊");
+        const role = data.role;
+        this.router.navigateByUrl('/' + role);
+      },
+      error: (err: any) => {
+        alert(err.error.message || "Internal Server Error!");
+      }
+    });
   }
 
   logout() {
-    sessionStorage.removeItem('token');
-    localStorage.removeItem('role');
-    this.router.navigateByUrl("/login");
+    this.authService.logout();
   }
 }

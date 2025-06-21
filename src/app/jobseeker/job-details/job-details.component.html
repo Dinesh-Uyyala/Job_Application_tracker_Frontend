@@ -1,9 +1,10 @@
 <div class="job-details-container">
   <h2>Job Details</h2>
+
   <mat-card>
     <mat-card-content>
 
-      <!-- Basic Job Info -->
+      <!-- Job Info -->
       <div class="job-details">
         <div class="job-field"><strong>Job Title:</strong> {{ job?.title }}</div>
         <div class="job-field"><strong>Company:</strong> {{ job?.companyName }}</div>
@@ -32,9 +33,11 @@
       <!-- Application Status -->
       <div class="job-apply-status" *ngIf="role === 'jobseeker'">
         <h3>Application Status</h3>
-        <p *ngIf="applicationStatus === 'Applied'">✅ You have applied for this job.</p>
-        <p *ngIf="applicationStatus === 'Not Applied'">ℹ️ You have not applied for this job.</p>
-        <p *ngIf="applicationStatus === 'Failed to apply'">❌ Failed to apply for this job.</p>
+        <p *ngIf="applicationStatus === 'Applied'">✅ You have already applied for this job.</p>
+        <p *ngIf="applicationStatus === 'Not Applied'">ℹ️ You have not applied for this job yet.</p>
+        <p *ngIf="applicationStatus === 'Rejected'">❌ Your application was rejected.</p>
+        <p *ngIf="applicationStatus === 'Interview'">📅 You have been shortlisted for an interview.</p>
+        <p *ngIf="applicationStatus === 'Offered'">🎉 You have been offered this job!</p>
         <p *ngIf="applicationStatus === 'Unknown'">❓ Application status is unknown.</p>
       </div>
 
@@ -42,35 +45,35 @@
       <div *ngIf="showApplicationForm" class="application-form">
         <h3>Application Form</h3>
         <form (ngSubmit)="submitApplication()" #appForm="ngForm">
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <input matInput name="name" [(ngModel)]="applicationData.name" required />
-  </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput name="name" [(ngModel)]="applicationData.name" required />
+          </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Email</mat-label>
-    <input matInput type="email" name="email" [(ngModel)]="applicationData.email" required />
-  </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" name="email" [(ngModel)]="applicationData.email" required />
+          </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Phone</mat-label>
-    <input matInput type="tel" name="phone" [(ngModel)]="applicationData.mobile" required />
-  </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Phone</mat-label>
+            <input matInput type="tel" name="mobile" [(ngModel)]="applicationData.mobile" required />
+          </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Resume Link</mat-label>
-    <input matInput type="url" name="resumeLink" [(ngModel)]="applicationData.resumeLink" required />
-  </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Resume Link</mat-label>
+            <input matInput type="url" name="resumeLink" [(ngModel)]="applicationData.resumeLink" required />
+          </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Submit Application</button>
-</form>
-
+          <button mat-button color="warn" type="button" (click)="cancelApplication()">Cancel</button>
+          <button mat-raised-button color="primary" type="submit">Submit Application</button>
+        </form>
       </div>
 
     </mat-card-content>
 
     <!-- Apply Now Button -->
-    <mat-card-actions *ngIf="role === 'jobseeker' && job.status === 'Open' && applicationStatus !== 'Applied'">
+    <mat-card-actions *ngIf="role === 'jobseeker' && job.status === 'Open' && applicationStatus === 'Not Applied' && !showApplicationForm">
       <button mat-raised-button color="accent" (click)="toggleApplicationForm()">Apply Now</button>
     </mat-card-actions>
   </mat-card>

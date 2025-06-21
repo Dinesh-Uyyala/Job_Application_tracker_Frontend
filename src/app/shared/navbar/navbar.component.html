@@ -4,7 +4,7 @@
   <span>Welcome {{userData.name || role}}</span>
   <span class="spacer"></span>
   <a mat-button [routerLink]="['/', role]">Dashboard</a>
-  <a mat-button routerLink="/profile" *ngIf="isLoggedIn">Profile</a>
+  <!-- <a mat-button routerLink="/profile" *ngIf="isLoggedIn">Profile</a> -->
   <a mat-button routerLink="/jobs">Jobs</a>
   <a mat-button routerLink="/recruiter/job-list" *ngIf="role==='recruiter'">Jobs List</a>
   <a mat-button routerLink="/recruiter/job-form" *ngIf="role==='recruiter'">Post Job</a>
