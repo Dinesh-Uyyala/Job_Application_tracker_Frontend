@@ -1,27 +1,107 @@
-# Frontend
+# 🚀 Mini Job Application Tracker – Step-by-Step Guide
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+Welcome to your all-in-one solution for tracking job applications!  
+Follow these steps to set up, run, and explore the features of your Job Application Tracker.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1️⃣ Clone the Repository
 
-## Code scaffolding
+git clone https://github.com/Dinesh-Uyyala/Job_Application_tracker_Frontend.git
+cd frontend    for frontend
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+git clone https://github.com/Dinesh-Uyyala/Job_Application_tracker_Backend.git
+cd backend     for backend
+---
 
-## Build
+2️⃣ Backend Setup (Node.js + Express + MySQL)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+a. Install Dependencies
 
-## Running unit tests
+cd backend
+npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+b. Configure Database
 
-## Running end-to-end tests
+- Create a MySQL database (e.g., job_tracker).
+- Update your backend/config/db.js or .env with your DB credentials.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+c. Run Database Migrations
 
-## Further help
+- Import the provided SQL schema or run migration scripts to create tables.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+d. Start the Backend Server
+
+npm run dev
+
+- The backend will run on http://localhost:3000
+
+---
+
+3️⃣ Frontend Setup (Angular)
+
+a. Install Dependencies
+
+cd ../frontend
+npm install
+
+b. Configure API URL
+
+- Edit src/environments/environment.ts and set apiUrl to your backend URL.
+
+c. Start the Frontend
+
+ng serve
+
+- The frontend will run on http://localhost:4200
+
+---
+
+4️⃣ Key Features
+
+- 🔐 Authentication: Secure login/register for Jobseekers, Recruiters, and Admins.
+- 📝 Job Application Form: Apply for jobs with a simple, intuitive form.
+- 📋 Applications Table: View, sort, and filter all your job applications.
+- ✏️ Edit/Delete: Update or remove your applications and job postings.
+<!-- - 📊 Dashboard: Visual summary stats for applications, interviews, offers, and more. -->
+- 🛡️ Role-Based Access: Different dashboards and permissions for each user type.
+
+---
+
+5️⃣ Bonus Features
+
+- Token-Based Authentication (JWT)
+- Responsive UI with Angular Material
+- RESTful API Design
+
+---
+
+6️⃣ Demo Accounts
+
+you can use these or you can register and login
+- Recruiter: dinesh@maxatmin.com / Dinesh@123
+- Jobseeker: dineshuyyala1@gmail.com / Dinesh@123
+
+---
+
+7️⃣ Explore the App
+
+- Register as a new user or use a demo account.
+- Login and access your personalized dashboard.
+- Add, edit, or delete job postings and applications.
+
+
+---
+
+8️⃣ Live Demo Links
+
+- 🌐 Frontend: https://job-application-tracker-frontend-two.vercel.app/jobs
+- 🖥️ Backend API: https://job-application-tracker-backend-b1su.onrender.com/api
+
+---
+
+✨ Happy Tracking & Good Luck with Your Job Search! ✨
+
+---
+
+> Replace the demo links above with your actual deployed URLs.
