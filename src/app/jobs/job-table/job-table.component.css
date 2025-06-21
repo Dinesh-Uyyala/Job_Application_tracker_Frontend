@@ -1,14 +1,11 @@
-/* mat-card { margin: 2rem; } */
-table { width: 100%; }
-.full-width {
-  width: 100%;
-  margin-bottom: 1em;
+.table-container {
+  overflow-x: auto;
 }
-
-mat-card {
-  padding: 1em;
-  width: 100%;
+mat-form-field {
+  width: 300px;
+  margin-bottom: 16px;
 }
-.mat-column-name, .mat-column-status, .mat-column-created, .mat-column-actions {
-  text-align: center;
+button {
+  display: inline-block !important;
+  opacity: 1 !important;
 }

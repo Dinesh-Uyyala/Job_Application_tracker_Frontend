@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JobseekerDashboardComponent } from '../dashboard/jobseeker-dashboard/jobseeker-dashboard.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   { path: '', component: JobseekerDashboardComponent },
@@ -31,7 +33,9 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     RouterModule,
-    MatIconModule
+    MatIconModule,
+    MatSortModule,
+    MatPaginatorModule
   ]
 })
 export class JobseekerModule { }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -8,13 +11,12 @@ import { environment } from 'src/environments/environment';
   templateUrl: './job-table.component.html',
   styleUrls: ['./job-table.component.css']
 })
-export class JobTableComponent implements OnInit {
-  jobs: any[] = [];
-  filteredJobsArray: any[] = [];
-  filterStatus = '';
-  statuses = ['Applied', 'Interview', 'Rejected', 'Offered', 'On Hold'];
-
-  columns: string[] = [
+export class JobTableComponent implements OnInit, AfterViewInit {
+  dataSource = new MatTableDataSource<any>([]);
+  role: string = '';
+  
+  // Base columns visible for all roles
+  displayedColumns: string[] = [
     'title',
     'companyName',
     'location',
@@ -25,34 +27,35 @@ export class JobTableComponent implements OnInit {
     'status'
   ];
 
-  role: string = '';
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    // Initialize role from localStorage safely
+    // Retrieve role from localStorage
     const userStr = localStorage.getItem('user');
     if (userStr) {
       try {
-        this.role= JSON.parse(userStr).role || '';
+        this.role = JSON.parse(userStr).role || '';
       } catch (e) {
         console.error('Failed to parse user from localStorage', e);
         this.role = '';
       }
     }
 
-    // Add 'actions' column only if role is recruiter
-  if (this.role === 'jobseeker') {
-  this.columns.push('applyJob');
-  // this.columns.push('actions');
-}
+    // Add role-specific columns
+    // if (this.role === 'recruiter') {
+    //   // this.displayedColumns.push('actions');
+    // } else 
+    if (this.role === 'jobseeker') {
+      this.displayedColumns.push('applyJob');
+    }
 
-
-    // Fetch jobs from API
+    // Load jobs data
     this.http.get<any[]>(`${environment.apiUrl}/jobs`).subscribe(
       (jobs) => {
-        this.jobs = jobs;
-        this.applyFilter();
+        this.dataSource.data = jobs;
       },
       (error) => {
         console.error('Failed to load jobs', error);
@@ -60,14 +63,18 @@ export class JobTableComponent implements OnInit {
     );
   }
 
-  applyFilter() {
-    this.filteredJobsArray = this.filterStatus
-      ? this.jobs.filter((job) => job.status === this.filterStatus)
-      : this.jobs;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   editJob(id: number) {
-    this.router.navigate(['/job-form', id]);
+    this.router.navigate(['/recruiter/job-form', id]);
   }
 
   deleteJob(id: number) {
@@ -77,12 +84,12 @@ export class JobTableComponent implements OnInit {
           headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
         })
         .subscribe(() => {
-          this.jobs = this.jobs.filter((j) => j.id !== id);
-          this.applyFilter();
+          this.dataSource.data = this.dataSource.data.filter((j) => j.id !== id);
         });
     }
   }
+
   applyJob(jobId: number) {
-  this.router.navigate(['/jobseeker/job-details', jobId]);
-}
+    this.router.navigate(['/jobseeker/job-details', jobId]);
+  }
 }

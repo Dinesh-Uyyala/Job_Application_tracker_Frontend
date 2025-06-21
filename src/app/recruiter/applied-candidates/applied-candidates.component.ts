@@ -19,11 +19,19 @@ export class AppliedCandidatesComponent implements OnInit {
     this.loadCandidates();
   }
 
-  loadCandidates() {
-    this.http.get<any[]>(`${environment.apiUrl}/jobs/applied/${this.jobId}`)
-      .subscribe(
-        data => this.candidates = data,
-        err => console.error('Failed to load candidates', err)
-      );
+loadCandidates() {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.error('No token found in localStorage');
+    return;
   }
+
+  this.http.get<any[]>(`${environment.apiUrl}/jobs/applied/${this.jobId}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  }).subscribe(
+    data => this.candidates = data,
+    err => console.error('Failed to load candidates', err)
+  );
+}
+
 }

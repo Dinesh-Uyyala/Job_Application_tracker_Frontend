@@ -1,11 +1,25 @@
 <mat-card>
   <h2>Jobseeker Dashboard</h2>
-  <div>
-    <p><mat-icon>assignment</mat-icon> Total Applications: {{ totalApplications }}</p>
-<p><mat-icon>hourglass_empty</mat-icon> Applied: {{ stats['Applied'] || 0 }}</p>
-<p><mat-icon>record_voice_over</mat-icon> Interview: {{ stats['Interview'] || 0 }}</p>
-<p><mat-icon>emoji_events</mat-icon> Offered: {{ stats['Offered'] || 0 }}</p>
-<p><mat-icon>highlight_off</mat-icon> Rejected: {{ stats['Rejected'] || 0 }}</p>
-
+  <div class="dashboard-summary">
+    <mat-card class="stat-card applied">
+      <div class="stat-value">{{ stats['Applied'] || 0 }}</div>
+      <div class="stat-label">Applied</div>
+    </mat-card>
+    <mat-card class="stat-card interview">
+      <div class="stat-value">{{ stats['Interview'] || 0 }}</div>
+      <div class="stat-label">Interview</div>
+    </mat-card>
+    <mat-card class="stat-card offered">
+      <div class="stat-value">{{ stats['Offered'] || 0 }}</div>
+      <div class="stat-label">Offered</div>
+    </mat-card>
+    <mat-card class="stat-card rejected">
+      <div class="stat-value">{{ stats['Rejected'] || 0 }}</div>
+      <div class="stat-label">Rejected</div>
+    </mat-card>
+    <mat-card class="stat-card total">
+      <div class="stat-value">{{ totalApplications }}</div>
+      <div class="stat-label">Total Applications</div>
+    </mat-card>
   </div>
 </mat-card>

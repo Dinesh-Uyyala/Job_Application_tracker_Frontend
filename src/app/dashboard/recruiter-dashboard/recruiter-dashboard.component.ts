@@ -19,7 +19,8 @@ export class RecruiterDashboardComponent implements OnInit {
       this.stats = {};
       this.totalApplications = 0;
       data.forEach((row: any) => {
-        this.stats[row.status] = row.applications;
+        console.log(row);
+        this.stats[row.status] = row.totalJobs;
         this.totalApplications += row.applications;
       });
     });

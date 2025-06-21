@@ -1,0 +1,7 @@
+.table-container {
+  overflow-x: auto;
+}
+mat-form-field {
+  width: 300px;
+  margin-bottom: 16px;
+}

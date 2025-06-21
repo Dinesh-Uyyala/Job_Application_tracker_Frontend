@@ -74,7 +74,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
 
   delete(jobId: number) {
     if (confirm('Are you sure you want to delete this job?')) {
-      this.http.delete(`${environment.apiUrl}/jobs/delete/${jobId}`, {
+      this.http.delete(`${environment.apiUrl}/jobs/${jobId}`, {
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       }).subscribe(() => this.ngOnInit());
     }

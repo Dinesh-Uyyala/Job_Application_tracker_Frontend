@@ -1,1 +1,8 @@
 mat-card { margin: 2rem; } table { width: 100%; }
+.table-container {
+  overflow-x: auto;
+}
+mat-form-field {
+  width: 300px;
+  margin-bottom: 16px;
+}
