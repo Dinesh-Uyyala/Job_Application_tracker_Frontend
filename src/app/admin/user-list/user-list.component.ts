@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-list',
@@ -13,7 +14,7 @@ export class UserListComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<any[]>('http://localhost:3000/api/admin/users', {
+    this.http.get<any[]>(`${environment.apiUrl}/admin/users`, {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     }).subscribe(users => this.users = users);
   }

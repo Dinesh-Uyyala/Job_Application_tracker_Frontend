@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-job-table',
@@ -48,7 +49,7 @@ export class JobTableComponent implements OnInit {
 
 
     // Fetch jobs from API
-    this.http.get<any[]>('http://localhost:3000/api/jobs').subscribe(
+    this.http.get<any[]>(`${environment.apiUrl}/jobs`).subscribe(
       (jobs) => {
         this.jobs = jobs;
         this.applyFilter();
@@ -72,7 +73,7 @@ export class JobTableComponent implements OnInit {
   deleteJob(id: number) {
     if (confirm('Are you sure you want to delete this job?')) {
       this.http
-        .delete(`http://localhost:3000/api/jobs/${id}`, {
+        .delete(`${environment.apiUrl}/jobs/${id}`, {
           headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
         })
         .subscribe(() => {

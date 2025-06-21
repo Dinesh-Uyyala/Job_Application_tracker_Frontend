@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-job-details',
@@ -39,7 +40,7 @@ export class JobDetailsComponent implements OnInit {
   }
 
   loadJobDetails(): void {
-    this.http.get<any>(`http://localhost:3000/api/jobs/${this.jobId}`)
+    this.http.get<any>(`${environment.apiUrl}/jobs/${this.jobId}`)
       .subscribe(
         data => this.job = data,
         err => {
@@ -53,7 +54,7 @@ export class JobDetailsComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     this.http.get<{ status: string }>(
-      `http://localhost:3000/api/jobs/${this.jobId}/status/${this.userId}`, 
+      `${environment.apiUrl}/jobs/${this.jobId}/status/${this.userId}`, 
       { headers }
     ).subscribe(
       res => {
@@ -81,7 +82,7 @@ export class JobDetailsComponent implements OnInit {
       ...this.applicationData
     };
 
-    this.http.post('http://localhost:3000/api/jobs/apply', payload, { headers })
+    this.http.post(`${environment.apiUrl}/jobs/apply`, payload, { headers })
       .subscribe(
         () => {
           alert('Application submitted successfully!');

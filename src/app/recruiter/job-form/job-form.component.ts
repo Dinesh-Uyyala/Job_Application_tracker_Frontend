@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-job-form',
@@ -35,7 +36,7 @@ loading = false;
   console.log(this.jobId);
   if (this.jobId) {
     this.loading = true;
-    this.http.get<any>(`http://localhost:3000/api/jobs/${this.jobId}`, {
+    this.http.get<any>(`${environment.apiUrl}/jobs/${this.jobId}`, {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     }).subscribe(data => {
       this.job = {
@@ -58,8 +59,8 @@ loading = false;
 
   save() {
     const url = this.jobId
-      ? `http://localhost:3000/api/jobs/edit/${this.jobId}`
-      : 'http://localhost:3000/api/jobs/create';
+      ? `${environment.apiUrl}/jobs/edit/${this.jobId}`
+      : `${environment.apiUrl}/jobs/create`;
 
     const method = this.jobId ? 'put' : 'post';
 

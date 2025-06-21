@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-applied-candidates',
@@ -19,7 +20,7 @@ export class AppliedCandidatesComponent implements OnInit {
   }
 
   loadCandidates() {
-    this.http.get<any[]>(`http://localhost:3000/api/jobs/applied/${this.jobId}`)
+    this.http.get<any[]>(`${environment.apiUrl}/jobs/applied/${this.jobId}`)
       .subscribe(
         data => this.candidates = data,
         err => console.error('Failed to load candidates', err)

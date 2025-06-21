@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-job-list',
@@ -45,7 +46,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.http.get<any[]>(`http://localhost:3000/api/jobs/recruiter/${this.recruiterId}`, {
+    this.http.get<any[]>(`${environment.apiUrl}/jobs/recruiter/${this.recruiterId}`, {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     }).subscribe(
       jobs => {
@@ -73,7 +74,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
 
   delete(jobId: number) {
     if (confirm('Are you sure you want to delete this job?')) {
-      this.http.delete(`http://localhost:3000/api/jobs/delete/${jobId}`, {
+      this.http.delete(`${environment.apiUrl}/jobs/delete/${jobId}`, {
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
       }).subscribe(() => this.ngOnInit());
     }
