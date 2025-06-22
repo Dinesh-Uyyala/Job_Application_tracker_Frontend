@@ -11,17 +11,20 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate:[AuthGuard],
     data: { roles: ['admin'] }
   },
   {
     path: 'recruiter',
     loadChildren: () => import('./recruiter/recruiter.module').then(m => m.RecruiterModule),
+    canActivate:[AuthGuard],
     data: { roles: ['recruiter'] }
   },
   {
     path: 'jobseeker',
     loadChildren: () => import('./jobseeker/jobseeker.module').then(m => m.JobseekerModule),
-      data: { roles: ['jobseeker'] }
+    canActivate:[AuthGuard],
+    data: { roles: ['jobseeker'] }
   },
   {
     path: 'jobs',
