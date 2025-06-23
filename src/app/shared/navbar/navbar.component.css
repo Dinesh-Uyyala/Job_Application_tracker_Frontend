@@ -1,2 +1,112 @@
-.spacer { flex: 1 1 auto; }
-a { color: white; text-decoration: none; margin: 0 10px; }
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;  /* Prevent overflow */
+  flex-wrap: wrap;   /* Allow wrapping for mobile screens */
+  padding: 0 10px;  /* Add horizontal padding for better spacing */
+}
+
+.logo {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  margin: 0 8px; /* Reduce margin for better fit */
+}
+
+.welcome-text {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .toolbar-content {
+    flex-direction: column;  /* Stack items on smaller screens */
+    align-items: flex-start; /* Align to start */
+    padding: 5px;  /* Adjust padding for mobile screens */
+  }
+
+  .spacer {
+    display: none; /* Hide spacer to save space */
+  }
+
+  .welcome-text {
+    margin-top: 10px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  a {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  mat-toolbar {
+    padding: 5px 10px;
+  }
+
+  .logo {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  button {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  mat-toolbar {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .logo {
+    font-size: 16px;
+    text-align: center;
+    margin: 5px 0;
+  }
+
+  .welcome-text {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  a {
+    font-size: 12px;
+  }
+
+  button {
+    font-size: 12px;
+  }
+
+  .spacer {
+    display: none;
+  }
+}
+
+/* For preventing zooming and fixing viewport scaling issues on mobile */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;  /* Hide horizontal overflow */
+}
+
+@media (max-width: 480px) {
+  html, body {
+    overflow-x: hidden; /* Prevent overflow in mobile */
+    font-size: 14px;  /* Adjust base font size for better scaling */
+  }
+}

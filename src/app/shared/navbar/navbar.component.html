@@ -1,16 +1,17 @@
 <mat-toolbar color="primary">
-  <span>Mini Job Application Tracker</span>
-  <span class="spacer"></span>
-  <span>Welcome {{userData.name || role}}</span>
-  <span class="spacer"></span>
-  <a mat-button [routerLink]="['/', role]" *ngIf="isLoggedIn">Dashboard</a>
-  <!-- <a mat-button routerLink="/profile" *ngIf="isLoggedIn">Profile</a> -->
-  <a mat-button routerLink="/jobs">Jobs</a>
-  <a mat-button routerLink="/recruiter/job-list" *ngIf="role==='recruiter'">Jobs List</a>
-  <a mat-button routerLink="/recruiter/job-form" *ngIf="role==='recruiter'">Post Job</a>
-  <a mat-button routerLink="/jobseeker/application-list" *ngIf="role==='jobseeker'">My Applications</a>
-  <a mat-button routerLink="/users" *ngIf="role==='admin'">Users</a>
-  <button mat-button (click)="register()" *ngIf="!isLoggedIn">Register</button>
-  <button mat-button (click)="login()" *ngIf="!isLoggedIn">Login</button>
-  <button mat-button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
+  <div class="toolbar-content">
+    <span class="logo">Mini Job Application Tracker</span>
+    <span class="spacer"></span>
+    <span class="welcome-text">Welcome {{userData.name || role}}</span>
+    <span class="spacer"></span>
+    <a mat-button [routerLink]="['/', role]" *ngIf="isLoggedIn">Dashboard</a>
+    <a mat-button routerLink="/jobs">Jobs</a>
+    <a mat-button routerLink="/recruiter/job-list" *ngIf="role==='recruiter'">Jobs List</a>
+    <a mat-button routerLink="/recruiter/job-form" *ngIf="role==='recruiter'">Post Job</a>
+    <a mat-button routerLink="/jobseeker/application-list" *ngIf="role==='jobseeker'">My Applications</a>
+    <a mat-button routerLink="/users" *ngIf="role==='admin'">Users</a>
+    <button mat-button (click)="register()" *ngIf="!isLoggedIn">Register</button>
+    <button mat-button (click)="login()" *ngIf="!isLoggedIn">Login</button>
+    <button mat-button (click)="logout()" *ngIf="isLoggedIn">Logout</button>
+  </div>
 </mat-toolbar>
